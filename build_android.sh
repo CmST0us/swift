@@ -6,7 +6,7 @@ utils/build-script \
     --android \
     --android-ndk $NDK_PATH \
     --android-arch aarch64 \
-    --android-api-level 23 \
+    --android-api-level 28 \
     --stdlib-deployment-targets=android-aarch64 \
     --native-swift-tools-path=$SWIFT_PATH \
     --native-clang-tools-path=$SWIFT_PATH \

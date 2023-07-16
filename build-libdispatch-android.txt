@@ -1,0 +1,58 @@
+# build static
+export NDK_PATH="/home/eki/Project/ndk/android-ndk-r25c"
+cmake -G Ninja -DCMAKE_TOOLCHAIN_FILE=/home/eki/Project/ndk/android-ndk-r25c/build/cmake/android.toolchain.cmake \
+    -DCMAKE_INSTALL_PREFIX=/home/eki/Project/swift-project/toolchain/swift-android-ndk-aarch64-install/usr \
+    -DCMAKE_BUILD_TYPE=Release \
+    -DBUILD_SHARED_LIBS=OFF \
+    -DANDROID_ABI=arm64-v8a \
+    -DANDROID_PLATFORM=android-28 \
+    -DANDROID_NDK=/home/eki/Project/ndk/android-ndk-r25c \
+    -DENABLE_SWIFT=ON \
+    -DCMAKE_Swift_COMPILER="/home/eki/Project/swift-project/toolchain/swift-android-ndk-aarch64-install/usr/bin/swiftc" \
+    -DCMAKE_Swift_FLAGS="-target aarch64-unknown-linux-android28 -tools-directory ${NDK_PATH}/toolchains/llvm/prebuilt/linux-x86_64/bin/ -sdk ${NDK_PATH}/toolchains/llvm/prebuilt/linux-x86_64/sysroot -resource-dir /home/eki/Project/swift-project/build/buildbot_linux/swift-linux-x86_64/lib/swift" \
+    ../../../swift-corelibs-libdispatch
+
+# build shared
+export NDK_PATH="/home/eki/Project/ndk/android-ndk-r25c"
+cmake -G Ninja -DCMAKE_TOOLCHAIN_FILE=/home/eki/Project/ndk/android-ndk-r25c/build/cmake/android.toolchain.cmake \
+    -DCMAKE_INSTALL_PREFIX=/home/eki/Project/swift-project/toolchain/swift-android-ndk-aarch64-install/usr \
+    -DCMAKE_BUILD_TYPE=Release \
+    -DBUILD_SHARED_LIBS=ON \
+    -DANDROID_ABI=arm64-v8a \
+    -DANDROID_PLATFORM=android-28 \
+    -DANDROID_NDK=/home/eki/Project/ndk/android-ndk-r25c \
+    -DENABLE_SWIFT=ON \
+    -DCMAKE_Swift_COMPILER="/home/eki/Project/swift-project/toolchain/swift-android-ndk-aarch64-install/usr/bin/swiftc" \
+    -DCMAKE_Swift_FLAGS="-target aarch64-unknown-linux-android28 -tools-directory ${NDK_PATH}/toolchains/llvm/prebuilt/linux-x86_64/bin/ -sdk ${NDK_PATH}/toolchains/llvm/prebuilt/linux-x86_64/sysroot -resource-dir /home/eki/Project/swift-project/build/buildbot_linux/swift-linux-x86_64/lib/swift" \
+    ../../../swift-corelibs-libdispatch
+
+
+=====================
+
+export NDK_PATH="/home/eki/Project/ndk/android-ndk-r25c"
+export SWIFT_PATH=/home/eki/Project/swift-project/toolchain/5.9/usr/bin
+$SWIFT_PATH/swiftc \
+    -tools-directory ${NDK_PATH}/toolchains/llvm/prebuilt/linux-x86_64/bin/ \
+    -target aarch64-unknown-linux-android21 \
+    -sdk ${NDK_PATH}/toolchains/llvm/prebuilt/linux-x86_64/sysroot \
+    -resource-dir build/Ninja-ReleaseAssert/swift-linux-x86_64/lib/swift
+    hello.swift
+
+====================
+ export NDK_PATH="/home/eki/Project/ndk/android-ndk-r25c"
+ /home/eki/Project/swift-project/build/buildbot_linux/swift-linux-x86_64/bin/swiftc -target aarch64-unknown-linux-android23 \
+    -tools-directory ${NDK_PATH}/toolchains/llvm/prebuilt/linux-x86_64/bin/ \
+    -sdk ${NDK_PATH}/toolchains/llvm/prebuilt/linux-x86_64/sysroot \
+    -resource-dir /home/eki/Project/swift-project/build/buildbot_linux/swift-linux-x86_64/lib/swift \
+    -output-file-map src/swift/CMakeFiles/swiftDispatch.dir/Release/output-file-map.json -incremental -j 1 \
+    -emit-library -o libswiftDispatch.so -module-name Dispatch -module-link-name swiftDispatch -emit-module \
+    -emit-module-path src/swift/swift/Dispatch.swiftmodule -emit-dependencies -DswiftDispatch_EXPORTS \
+    -module-cache-path "/home/eki/Project/swift-project/build/buildbot_linux/libdispatch-linux-x86_64/module-cache" \
+    -O -Xcc -fblocks -Xcc -fmodule-map-file=/home/eki/Project/swift-project/swift-corelibs-libdispatch/dispatch/module.modulemap \
+    -Xcc -I/home/eki/Project/swift-project/swift-corelibs-libdispatch -Xcc \
+    -I/home/eki/Project/swift-project/swift-corelibs-libdispatch/src/swift/shims \
+    -vfsoverlay /home/eki/Project/swift-project/build/buildbot_linux/libdispatch-linux-x86_64/dispatch-vfs-overlay.yaml \
+    -I /home/eki/Project/swift-project/swift-corelibs-libdispatch/src/BlocksRuntime \
+    -I /home/eki/Project/swift-project/build/buildbot_linux/libdispatch-linux-x86_64 \
+    -I /home/eki/Project/swift-project/swift-corelibs-libdispatch -I /home/eki/Project/swift-project/swift-corelibs-libdispatch/src \
+    -I /home/eki/Project/swift-project/build/buildbot_linux/libdispatch-linux-x86_64/src /home/eki/Project/swift-project/swift-corelibs-libdispatch/src/swift/Block.swift /home/eki/Project/swift-project/swift-corelibs-libdispatch/src/swift/Data.swift /home/eki/Project/swift-project/swift-corelibs-libdispatch/src/swift/Dispatch.swift /home/eki/Project/swift-project/swift-corelibs-libdispatch/src/swift/IO.swift /home/eki/Project/swift-project/swift-corelibs-libdispatch/src/swift/Private.swift /home/eki/Project/swift-project/swift-corelibs-libdispatch/src/swift/Queue.swift /home/eki/Project/swift-project/swift-corelibs-libdispatch/src/swift/Source.swift /home/eki/Project/swift-project/swift-corelibs-libdispatch/src/swift/Time.swift /home/eki/Project/swift-project/swift-corelibs-libdispatch/src/swift/Wrapper.swift -no-toolchain-stdlib-rpath -Xlinker -soname -Xlinker libswiftDispatch.so  -L /home/eki/Project/swift-project/build/buildbot_linux/libdispatch-linux-x86_64/src/swift  -L /home/eki/Project/swift-project/build/buildbot_linux/libdispatch-linux-x86_64  -L /home/eki/Project/swift-project/build/buildbot_linux/libdispatch-linux-x86_64   -L /usr/lib/gcc/x86_64-linux-gnu/11 -Xlinker -rpath -Xlinker /home/eki/Project/swift-project/build/buildbot_linux/libdispatch-linux-x86_64
